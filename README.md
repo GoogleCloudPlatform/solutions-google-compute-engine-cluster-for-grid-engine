@@ -43,11 +43,8 @@ The application assumes you have a
 [Google Compute Engine](https://developers.google.com/compute/docs/signup)
 services are enabled on the project.
 
-The application uses the
-[gcutil](https://developers.google.com/compute/docs/gcutil)
-command line tool for Google Compute Engine.
 Make sure to have the latest version of the
-[Cloud SDK](https://developers.google.com/cloud/sdk/) installed
+[Cloud SDK](https://cloud.google.com/cloud/sdk/) installed
 and added to your PATH environment variable.
 
 #### Authenticaton and default project
@@ -61,24 +58,11 @@ project.  The default project must be set to the project where the Grid Engine
 cluster will be deployed.
 
 The project ID is shown at the top of the project's "Overview" page
-of the [Developers Console](https://cloud.google.com/console).
+of the [Developers Console](https://console.developers.google.com/).
 
 The default project for Cloud SDK tools can be changed with the command:
 
     gcloud config set project <project ID>
-
-#### SSH key
-
-gcutil uses its own
-[SSH key](https://developers.google.com/compute/docs/instances#sshkeys),
-and the key is stored in .ssh directory of the user's home directory as
-`$HOME/.ssh/google_compute_engine` (private key) and
-`$HOME/.ssh/google_compute_engine.pub` (public key).
-
-If the SSH key for `gcutil` doesn't already exist, you will be prompted
-the first time you attempt to create a Compute Engine instance running
-the `cluster_setup.sh` script.  When prompted to enter a passphrase,
-just hit enter to create SSH keys with an empty passphrase.
 
 Environment
 -----------
@@ -98,21 +82,21 @@ Instructions for installing and configuring Grid Engine are provided below.
 
     default: `my-grid`
 
-    b. Set `MASTER_NODE_MACHINE_TYPE` (see [Machine Types](https://developers.google.com/compute/docs/machine-types))
+    b. Set `MASTER_NODE_MACHINE_TYPE` (see [Machine Types](https://cloud.google.com/compute/docs/machine-types))
 
     default: `n1-standard-4`
 
-    c. Set `MASTER_NODE_DISK_SIZE_GB` (see [Persistent Disks](https://developers.google.com/compute/docs/disks))
+    c. Set `MASTER_NODE_DISK_SIZE` (see [Persistent Disks](https://cloud.google.com/compute/docs/disks/))
 
-    default: `500`
+    default: `500GB`
 
-    d. Set `WORKER_NODE_MACHINE_TYPE` (see [Machine Types](https://developers.google.com/compute/docs/machine-types))
+    d. Set `WORKER_NODE_MACHINE_TYPE` (see [Machine Types](https://cloud.google.com/compute/docs/machine-types))
 
     default: `n1-standard-4`
 
-    e. Set `WORKER_NODE_DISK_SIZE_GB` (see [Persistent Disks](https://developers.google.com/compute/docs/disks))
+    e. Set `WORKER_NODE_DISK_SIZE` (see [Persistent Disks](https://cloud.google.com/compute/docs/disks/))
 
-    default: `500`
+    default: `500GB`
 
     f. Set `WORKER_NODE_COUNT`
 
@@ -144,12 +128,12 @@ Instructions for installing and configuring Grid Engine are provided below.
    starting at 0.
 
    Each instance runs `instance_startup_script.sh` as a
-   [startup-script](https://developers.google.com/compute/docs/howtos/startupscript)
+   [startup-script](https://cloud.google.com/compute/docs/startupscript)
    when it starts.
 
 1. Connect to the master:
 
-        gcutil ssh <master_hostname>
+        gcloud compute ssh <master_hostname> --zone <master_zone>
 
 1. Install the Grid Engine components:
 
@@ -206,7 +190,7 @@ Instructions for installing and configuring Grid Engine are provided below.
 
     a. Connect to the worker node:
 
-            gcutil ssh <worker_hostname>
+            gcloud compute ssh <worker_hostname> --zone <worker_zone>
 
     b. On the worker node, install the Grid Engine components:
 
@@ -222,7 +206,7 @@ Test
 ----
 1. Connect to the master:
 
-        gcutil ssh <master_hostname>
+        gcloud compute ssh <master_hostname> --zone <master_zone>
 
 1. On the master, run qhost:
 

@@ -41,13 +41,13 @@ readonly WORKER_DATA_DISK_PATTERN="${CLUSTER_PREFIX}-ww-%d-data"
 readonly MASTER_NODE_MACHINE_TYPE=n1-standard-4
 readonly MASTER_NODE_ZONE=us-central1-a
 readonly MASTER_NODE_IMAGE=debian-7
-readonly MASTER_NODE_DISK_SIZE_GB=500
+readonly MASTER_NODE_DISK_SIZE=500GB
 readonly MASTER_NODE_SCOPE=
 
 readonly WORKER_NODE_MACHINE_TYPE=n1-standard-4
 readonly WORKER_NODE_ZONE=us-central1-a
 readonly WORKER_NODE_IMAGE=debian-7
-readonly WORKER_NODE_DISK_SIZE_GB=500
+readonly WORKER_NODE_DISK_SIZE=500GB
 readonly WORKER_NODE_SCOPE=
 
 # Specify the number of each node type
