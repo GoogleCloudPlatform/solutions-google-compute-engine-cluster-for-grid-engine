@@ -20,23 +20,21 @@ set -o nounset
 # The following can be used to run master and worker-specific code
 
 # Get the master list
-MASTERS=$(curl \
-    "http://metadata/computeMetadata/v1/instance/attributes/cluster-master" \
-    -H "X-Google-Metadata-Request: True")
+MASTERS=$(/usr/share/google/get_metadata_value attributes/cluster-master)
 HOSTNAME=$(hostname --short)
 
 echo "MASTER instances: ${MASTERS}"
 echo "This instance: ${HOSTNAME}"
 
-declare i_am_master=0
+declare I_AM_MASTER=0
 for master in $MASTERS; do
   if [[ "${master}" == "$HOSTNAME" ]]; then
-    i_am_master=1
+    I_AM_MASTER=1
     break
   fi
 done
 
-if [[ $i_am_master -eq 1 ]]; then
+if [[ ${I_AM_MASTER} -eq 1 ]]; then
   echo "I am a master"
 else
   echo "I am NOT a master"
@@ -57,7 +55,7 @@ DISK_DEV=$(basename $(readlink /dev/disk/by-id/google-$(hostname)-data))
 
 # Mount it
 /usr/share/google/safe_format_and_mount \
-  -m "mkfs.ext4 -F -q" /dev/$DISK_DEV /mnt/data #&> /tmp/mount.txt
+  -m "mkfs.ext4 -F -q" /dev/${DISK_DEV} /mnt/data
 
 chmod 777 /mnt/data
 
