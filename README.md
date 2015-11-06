@@ -1,6 +1,15 @@
 Google Compute Engine Cluster for Grid Engine
 =============================================
 
+
+------------
+
+> **This repository is deprecated.**
+>
+> See  [Create a Grid Engine cluster on Google Compute Engine](http://googlegenomics.readthedocs.org/en/latest/use_cases/setup_gridengine_cluster_on_compute_engine/index.html) for instructions from the Google Genomics team.
+
+------------
+
 Copyright
 ---------
 
